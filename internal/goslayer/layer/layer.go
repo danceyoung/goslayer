@@ -34,16 +34,8 @@ func (createstep CreateStep) Do(layer *Layer) {
 		fmt.Println("Raise a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	maincontent := `
-package main
 
-import "fmt"
-
-func main() {
-	fmt.Println("Hello World.")
-}
-	`
-	fmt.Println(mainfile.WriteString(maincontent))
+	mainfile.WriteString(mainTemplate())
 
 	os.MkdirAll("./"+projectName+"/internal/myapp", os.ModePerm)
 	os.Mkdir("./"+projectName+"/internal/pkg", os.ModePerm)
