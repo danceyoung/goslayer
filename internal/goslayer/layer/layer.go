@@ -29,6 +29,27 @@ func (createstep CreateStep) Do(layer *Layer) {
 	os.Mkdir("./"+projectName, os.ModePerm)
 	os.MkdirAll("./"+projectName+"/cmd/myapp", os.ModePerm)
 	os.MkdirAll("./"+projectName+"/cmd/myapp/router/handler", os.ModePerm)
+	mainfile, err := os.Create("./" + projectName + "/cmd/myapp/main.go")
+	if err != nil {
+		fmt.Println("Raise a error when creating project: ", err.Error())
+		panic(nil)
+	}
+	maincontent := `
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello World.")
+}
+	`
+	fmt.Println(mainfile.WriteString(maincontent))
+
+	os.MkdirAll("./"+projectName+"/internal/myapp", os.ModePerm)
+	os.Mkdir("./"+projectName+"/internal/pkg", os.ModePerm)
+
+	os.Mkdir("./"+projectName+"/pkg", os.ModePerm)
+
 	layer.NextStepAndDo(OverStep{})
 }
 
