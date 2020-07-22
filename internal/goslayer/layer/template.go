@@ -1,6 +1,19 @@
 package layer
 
-func mainUseHttpHandlerTemplate() string {
+type template interface {
+	mainTemplate() string
+	routerTemplate() string
+	baseHandlerTemplate() string
+	eventHandlerTemplate() string
+}
+
+func newTemplate(webframework string) template {
+	return httpHandlerTemplate{}
+}
+
+type httpHandlerTemplate struct{}
+
+func (hht httpHandlerTemplate) mainTemplate() string {
 	return `package main
 
 import (
@@ -14,7 +27,7 @@ func main() {
 }`
 }
 
-func routerTemplate() string {
+func (hht httpHandlerTemplate) routerTemplate() string {
 	return `package router
 
 import (
@@ -29,13 +42,13 @@ func init() {
 }`
 }
 
-func baseHandlerTemplate() string {
+func (hht httpHandlerTemplate) baseHandlerTemplate() string {
 	return `package handler
 
 type BaseHandler struct{}`
 }
 
-func eventHandlerTemplate() string {
+func (hht httpHandlerTemplate) eventHandlerTemplate() string {
 	return `package handler
 
 import (
