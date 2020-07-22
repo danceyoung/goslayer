@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "goslayer/cmd/myapp/router"
+	_ "enventpro/cmd/myapp/router"
 	"log"
 	"net/http"
 )
