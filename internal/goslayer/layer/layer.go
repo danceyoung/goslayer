@@ -52,32 +52,35 @@ func (createstep CreateStep) Do(layer *Layer) {
 	os.MkdirAll("./"+layer.projectname+"/cmd/myapp", os.ModePerm)
 	os.MkdirAll("./"+layer.projectname+"/cmd/myapp/router/handler", os.ModePerm)
 	routerfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/router.go")
+
+	temp := newTemplate(layer.webframework)
+
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
 	if layer.webframework == "2" {
-		routerfile.WriteString(strings.ReplaceAll(routerTemplate(), "goslayer", layer.projectname))
+		routerfile.WriteString(strings.ReplaceAll(temp.routerTemplate(), "goslayer", layer.projectname))
 		basehanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
 		if err != nil {
 			fmt.Println("panic a error when creating project: ", err.Error())
 			panic(nil)
 		}
-		basehanderfile.WriteString(baseHandlerTemplate())
+		basehanderfile.WriteString(temp.baseHandlerTemplate())
 
 		eventhanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/eventhandler.go")
 		if err != nil {
 			fmt.Println("panic a error when creating project: ", err.Error())
 			panic(nil)
 		}
-		eventhanderfile.WriteString(eventHandlerTemplate())
+		eventhanderfile.WriteString(temp.eventHandlerTemplate())
 
 		mainfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/main.go")
 		if err != nil {
 			fmt.Println("panic a error when creating project: ", err.Error())
 			panic(nil)
 		}
-		mainfile.WriteString(strings.ReplaceAll(mainUseHttpHandlerTemplate(), "goslayer", layer.projectname))
+		mainfile.WriteString(strings.ReplaceAll(temp.mainTemplate(), "goslayer", layer.projectname))
 	}
 
 	os.MkdirAll("./"+layer.projectname+"/internal/myapp", os.ModePerm)
