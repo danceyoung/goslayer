@@ -1,8 +1,9 @@
 package router
 
 import (
-	"goslayer/cmd/myapp/router/handler"
 	"net/http"
+
+	"github.com/danceyoung/goslayer/cmd/myapp/router/handler"
 )
 
 func init() {

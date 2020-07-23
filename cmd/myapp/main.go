@@ -1,9 +1,10 @@
 package main
 
 import (
-	_ "goslayer/cmd/myapp/router"
 	"log"
 	"net/http"
+
+	_ "github.com/danceyoung/goslayer/cmd/myapp/router"
 )
 
 func main() {

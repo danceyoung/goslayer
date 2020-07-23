@@ -2,8 +2,9 @@ package main
 
 import (
 	"bufio"
-	"goslayer/internal/goslayer/layer"
 	"os"
+
+	"github.com/danceyoung/goslayer/internal/goslayer/layer"
 )
 
 func main() {
