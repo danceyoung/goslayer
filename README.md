@@ -8,6 +8,8 @@ A tool that helps you to create a golang project **in seconds**.
 buildin http.handler or gin
 router-biz
 
+repository link
+
 go check go install
 
 cmd go mod tidy
