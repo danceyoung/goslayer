@@ -84,8 +84,13 @@ func (createstep CreateStep) Do(layer *Layer) {
 	}
 
 	os.MkdirAll("./"+layer.projectname+"/internal/myapp", os.ModePerm)
-	os.Mkdir("./"+layer.projectname+"/internal/pkg", os.ModePerm)
-
+	os.MkdirAll("./"+layer.projectname+"/internal/pkg/middleware", os.ModePerm)
+	httsetmwfile, err := os.Create("./" + layer.projectname + "/internal/pkg/middleware/httpset.go")
+	if err != nil {
+		fmt.Println("panic a error when creating project: ", err.Error())
+		panic(nil)
+	}
+	httsetmwfile.WriteString(temp.httpMiddlewareTemplate())
 	os.Mkdir("./"+layer.projectname+"/pkg", os.ModePerm)
 
 	layer.next(OverStep{})
