@@ -16,14 +16,11 @@ type DescStep struct {
 
 func (descstep DescStep) Do(layer *Layer) {
 	if layer.textscanned == "" {
-		fmt.Println("GoSLayer is a tool that helps you to create a golang project that is layered base on a standard architecture layout and followed by Package-Oriented-Design guideline.")
 		fmt.Print("Please enter your project name: ")
 	} else {
 		layer.projectname = layer.textscanned
-		fmt.Println("Please choose a web framework: ")
-		fmt.Println("[1] use gin")
-		fmt.Println("[2] use http's handler buildin golang")
-		fmt.Print("entry 1 or 2: ")
+		fmt.Println("\nPlease choose a web framework: ")
+		fmt.Print("(1) use gin, (2) use handler buildin:")
 		layer.next(ChooseWebFStep{})
 	}
 }
