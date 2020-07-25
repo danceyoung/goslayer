@@ -11,10 +11,10 @@ type Step interface {
 	Do(*Layer)
 }
 
-type DescStep struct {
+type EntryProjectNameStep struct {
 }
 
-func (descstep DescStep) Do(layer *Layer) {
+func (projectstep EntryProjectNameStep) Do(layer *Layer) {
 	if layer.textscanned == "" {
 		fmt.Print("Please enter your project name: ")
 	} else {
