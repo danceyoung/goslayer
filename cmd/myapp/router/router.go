@@ -9,6 +9,7 @@ import (
 
 func init() {
 	path := "/goslayer"
-	eh := new(handler.EventHandler)
-	http.Handle(path+"/events", middleware.HttpSet((eh.Events)))
+
+	http.Handle(path+"/events", middleware.HttpSet(((&handler.EventHandler{}).Events)))
+	http.Handle(path+"/events/join", middleware.HttpSet(((&handler.EventHandler{}).JoinAEvent)))
 }
