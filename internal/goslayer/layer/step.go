@@ -95,6 +95,14 @@ func (createstep CreateStep) Do(layer *Layer) {
 		panic(nil)
 	}
 	httsetmwfile.WriteString(temp.httpMiddlewareTemplate())
+
+	os.MkdirAll("./"+layer.projectname+"/internal/myapp/event", os.ModePerm)
+	eventbizfile, err := os.Create("./" + layer.projectname + "/internal/myapp/event/event.go")
+	if err != nil {
+		fmt.Println("panic a error when creating project: ", err.Error())
+		panic(nil)
+	}
+	eventbizfile.WriteString(temp.eventBizTemplate())
 	os.Mkdir("./"+layer.projectname+"/pkg", os.ModePerm)
 
 	layer.next(OverStep{})
