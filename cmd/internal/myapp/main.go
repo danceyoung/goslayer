@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	_ "github.com/danceyoung/goslayer/cmd/myapp/router"
+	_ "github.com/danceyoung/goslayer/cmd/internal/myapp/router"
 )
 
 func main() {
