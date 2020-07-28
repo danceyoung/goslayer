@@ -70,7 +70,7 @@ func (createstep CreateStep) Do(layer *Layer) {
 			fmt.Println("panic a error when creating project: ", err.Error())
 			panic(nil)
 		}
-		eventhanderfile.WriteString(temp.eventHandlerTemplate())
+		eventhanderfile.WriteString(strings.ReplaceAll(temp.eventHandlerTemplate(), "goslayer", layer.projectname))
 
 		basehandlerfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
 		if err != nil {
