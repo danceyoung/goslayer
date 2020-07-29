@@ -48,13 +48,11 @@ type CreateStep struct{}
 func (createstep CreateStep) Do(layer *Layer) {
 	os.MkdirAll("./"+layer.projectname+"/cmd/myapp/router/handler", os.ModePerm)
 	routerfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/router.go")
-
-	temp := newTemplate(layer.webframework)
-
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
+	temp := newTemplate(layer.webframework)
 
 	routerfile.WriteString(strings.ReplaceAll(temp.routerTemplate(), "goslayer", layer.projectname))
 	basehanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
@@ -70,13 +68,6 @@ func (createstep CreateStep) Do(layer *Layer) {
 		panic(nil)
 	}
 	eventhanderfile.WriteString(strings.ReplaceAll(temp.eventHandlerTemplate(), "goslayer", layer.projectname))
-
-	basehandlerfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
-	if err != nil {
-		fmt.Println("panic a error when creating project: ", err.Error())
-		panic(nil)
-	}
-	basehandlerfile.WriteString(temp.baseHandlerTemplate())
 
 	mainfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/main.go")
 	if err != nil {
