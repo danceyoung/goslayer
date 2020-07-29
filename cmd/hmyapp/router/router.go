@@ -3,7 +3,7 @@ package router
 import (
 	"net/http"
 
-	"github.com/danceyoung/goslayer/cmd/internal/myapp/router/handler"
+	"github.com/danceyoung/goslayer/cmd/hmyapp/router/handler"
 	"github.com/danceyoung/goslayer/internal/pkg/middleware"
 )
 
