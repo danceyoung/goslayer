@@ -1,21 +1,21 @@
-package layer
+package template
 
 type template interface {
-	mainTemplate() string
-	routerTemplate() string
-	baseHandlerTemplate() string
-	eventHandlerTemplate() string
-	httpMiddlewareTemplate() string
-	eventBizTemplate() string
+	MainTemplate() string
+	RouterTemplate() string
+	BaseHandlerTemplate() string
+	EventHandlerTemplate() string
+	HttpMiddlewareTemplate() string
+	EventBizTemplate() string
 }
 
-func newTemplate(webframework string) template {
+func NewTemplate(webframework string) template {
 	return httpHandlerTemplate{}
 }
 
 type httpHandlerTemplate struct{}
 
-func (hht httpHandlerTemplate) mainTemplate() string {
+func (hht httpHandlerTemplate) MainTemplate() string {
 	return `package main
 
 import (
@@ -29,7 +29,7 @@ func main() {
 }`
 }
 
-func (hht httpHandlerTemplate) routerTemplate() string {
+func (hht httpHandlerTemplate) RouterTemplate() string {
 	return `package router
 
 import (
@@ -45,7 +45,7 @@ func init() {
 }`
 }
 
-func (hht httpHandlerTemplate) baseHandlerTemplate() string {
+func (hht httpHandlerTemplate) BaseHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -80,7 +80,7 @@ func (baseh *BaseHandler) responseError(rw http.ResponseWriter, err error) {
 }`
 }
 
-func (hht httpHandlerTemplate) eventHandlerTemplate() string {
+func (hht httpHandlerTemplate) EventHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -132,7 +132,7 @@ func (eventh *EventHandler) JoinAEvent(rw http.ResponseWriter, req *http.Request
 }`
 }
 
-func (hht httpHandlerTemplate) httpMiddlewareTemplate() string {
+func (hht httpHandlerTemplate) HttpMiddlewareTemplate() string {
 	return `package middleware
 
 import (
@@ -149,7 +149,7 @@ func HttpSet(hf func(http.ResponseWriter, *http.Request)) http.Handler {
 }`
 }
 
-func (hht httpHandlerTemplate) eventBizTemplate() string {
+func (hht httpHandlerTemplate) EventBizTemplate() string {
 	return `package event
 
 import "errors"

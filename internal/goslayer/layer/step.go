@@ -6,6 +6,8 @@ import (
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/danceyoung/goslayer/internal/goslayer/layer/template"
 )
 
 type Step interface {
@@ -52,29 +54,29 @@ func (createstep CreateStep) Do(layer *Layer) {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	temp := newTemplate(layer.webframework)
+	temp := template.NewTemplate(layer.webframework)
 
-	routerfile.WriteString(strings.ReplaceAll(temp.routerTemplate(), "goslayer", layer.projectname))
+	routerfile.WriteString(strings.ReplaceAll(temp.RouterTemplate(), "goslayer", layer.projectname))
 	basehanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	basehanderfile.WriteString(temp.baseHandlerTemplate())
+	basehanderfile.WriteString(temp.BaseHandlerTemplate())
 
 	eventhanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/eventhandler.go")
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	eventhanderfile.WriteString(strings.ReplaceAll(temp.eventHandlerTemplate(), "goslayer", layer.projectname))
+	eventhanderfile.WriteString(strings.ReplaceAll(temp.EventHandlerTemplate(), "goslayer", layer.projectname))
 
 	mainfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/main.go")
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	mainfile.WriteString(strings.ReplaceAll(temp.mainTemplate(), "goslayer", layer.projectname))
+	mainfile.WriteString(strings.ReplaceAll(temp.MainTemplate(), "goslayer", layer.projectname))
 
 	os.MkdirAll("./"+layer.projectname+"/internal/myapp", os.ModePerm)
 	os.MkdirAll("./"+layer.projectname+"/internal/pkg/middleware", os.ModePerm)
@@ -83,7 +85,7 @@ func (createstep CreateStep) Do(layer *Layer) {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	httsetmwfile.WriteString(temp.httpMiddlewareTemplate())
+	httsetmwfile.WriteString(temp.HttpMiddlewareTemplate())
 
 	os.MkdirAll("./"+layer.projectname+"/internal/myapp/event", os.ModePerm)
 	eventbizfile, err := os.Create("./" + layer.projectname + "/internal/myapp/event/event.go")
@@ -91,7 +93,7 @@ func (createstep CreateStep) Do(layer *Layer) {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	eventbizfile.WriteString(temp.eventBizTemplate())
+	eventbizfile.WriteString(temp.EventBizTemplate())
 	os.Mkdir("./"+layer.projectname+"/pkg", os.ModePerm)
 
 	layer.next(OverStep{})
