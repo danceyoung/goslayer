@@ -8,7 +8,7 @@
 
 ## Usage
 
-以mac电脑为例
+Demo on macOS
 
 * Download `goslayer-macos` execute file.
 * Open a terminal, cd a directory where you will creating your project, then run `goslayer-macos`.
