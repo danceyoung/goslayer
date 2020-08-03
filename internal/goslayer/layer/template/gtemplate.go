@@ -6,7 +6,7 @@ func (gt GINTemplate) MainTemplate() string {
 	return `package main
 
 import (
-	"github.com/danceyoung/goslayer/cmd/gmyapp/router"
+	"github.com/danceyoung/goslayer/cmd/myapp/router"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,7 +20,7 @@ func (gt GINTemplate) RouterTemplate() string {
 	return `package router
 
 import (
-	"github.com/danceyoung/goslayer/cmd/gmyapp/router/handler"
+	"github.com/danceyoung/goslayer/cmd/myapp/router/handler"
 	"github.com/gin-gonic/gin"
 )
 

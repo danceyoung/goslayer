@@ -18,7 +18,7 @@ import (
 	"log"
 	"net/http"
 
-	_ "github.com/danceyoung/goslayer/cmd/hmyapp/router"
+	_ "github.com/danceyoung/goslayer/cmd/myapp/router"
 )
 
 func main() {
@@ -30,13 +30,17 @@ func (hht HttpHandlerTemplate) RouterTemplate() string {
 	return `package router
 
 import (
-	"github.com/danceyoung/goslayer/cmd/gmyapp/router/handler"
-	"github.com/gin-gonic/gin"
+	"net/http"
+
+	"github.com/danceyoung/goslayer/cmd/myapp/router/handler"
+	"github.com/danceyoung/goslayer/internal/pkg/middleware"
 )
 
-func Register(engine *gin.Engine) {
-	engine.GET("/goslayer/events", (&handler.EventHandler{}).Events)
-	engine.POST("goslayer/events/join", (&handler.EventHandler{}).JoinAEvent)
+func init() {
+	path := "/goslayer"
+
+	http.Handle(path+"/events", middleware.HttpSet(((&handler.EventHandler{}).Events)))
+	http.Handle(path+"/events/join", middleware.HttpSet(((&handler.EventHandler{}).JoinAEvent)))
 }`
 }
 
