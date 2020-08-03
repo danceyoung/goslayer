@@ -15,6 +15,8 @@ const (
 	httpHandlerWebFramework string = "HttpHandler"
 )
 
+const stringReplacedInImportPath string = "github.com/danceyoung/goslayer"
+
 func newTemplate(webframework string) template.Template {
 	if webframework == httpHandlerWebFramework {
 		return template.HttpHandlerTemplate{}
@@ -34,8 +36,8 @@ func (projectstep EntryProjectNameStep) Do(layer *Layer) {
 		fmt.Print("Please enter your project name: ")
 	} else {
 		layer.projectname = layer.textscanned
-		fmt.Println("\nPlease choose a web framework: ")
-		fmt.Print("(1) use gin, (2) use handler buildin:")
+		fmt.Println("\nPlease choose a web framework, ")
+		fmt.Print("(1) use gin, (2) use handler buildin: ")
 		layer.next(ChooseWebFStep{})
 	}
 }
@@ -71,7 +73,7 @@ func (createstep CreateStep) Do(layer *Layer) {
 	}
 	temp := newTemplate(layer.webframework)
 
-	routerfile.WriteString(strings.ReplaceAll(temp.RouterTemplate(), "goslayer", layer.projectname))
+	routerfile.WriteString(strings.ReplaceAll(temp.RouterTemplate(), stringReplacedInImportPath, layer.projectname))
 	basehanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
@@ -84,14 +86,14 @@ func (createstep CreateStep) Do(layer *Layer) {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	eventhanderfile.WriteString(strings.ReplaceAll(temp.EventHandlerTemplate(), "goslayer", layer.projectname))
+	eventhanderfile.WriteString(strings.ReplaceAll(temp.EventHandlerTemplate(), stringReplacedInImportPath, layer.projectname))
 
 	mainfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/main.go")
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	mainfile.WriteString(strings.ReplaceAll(temp.MainTemplate(), "goslayer", layer.projectname))
+	mainfile.WriteString(strings.ReplaceAll(temp.MainTemplate(), stringReplacedInImportPath, layer.projectname))
 
 	os.MkdirAll("./"+layer.projectname+"/internal/myapp", os.ModePerm)
 	os.MkdirAll("./"+layer.projectname+"/internal/pkg/middleware", os.ModePerm)
