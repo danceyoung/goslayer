@@ -10,7 +10,7 @@
 ### Demo on macOS
 
 * Download `goslayer-macos` execute file.
-* Open a terminal, cd a directory where you will creating your project, then run `goslayer-macos`.
+* Open a terminal, cd a directory where you will creating your project.
    * `./xxx/xxx/goslayer-macos //the download path of goslayer-macos`
 * Enter your project name (here is `goapp`) and then choose a web framework(gin or http handler, default is gin)
 * cd `goapp`
