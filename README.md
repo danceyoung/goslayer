@@ -14,8 +14,8 @@
    `./xxx/xxx/goslayer-macos //the download path of goslayer-macos`
 * Enter your project name (here is `goapp`) and then choose a web framework(gin or http handler, default is gin)
 * cd `goapp`
-  * `./go mod init goapp //use go modules`
-  * `./go run ./cmd/myapp //run you app`
+   `./go mod init goapp //use go modules`
+   `./go run ./cmd/myapp //run you app`
 * In anther terminal, run `curl --location --request GET 'http://127.0.0.1:8080/goslayer/events'` , response data will output.
 
 ### Creation process and your project structure might look like this:
