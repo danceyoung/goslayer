@@ -23,10 +23,14 @@ Creation process and your project structure might look like this:
 
 ```
 GoSLayer is a tool that helps you to create a golang project in seconds.
+
 • layered base on a standard architecture layout
 • followed by Package-Oriented-Design guideline
-link: https://github.com/danceyoung/goslayerPlease enter your project name: goappPlease choose a web framework,
+link: https://github.com/danceyoung/goslayer
+
+Please enter your project name: goappPlease choose a web framework,
 (1) use gin, (2) use handler buildin: 1
+
 Creating your go project with GIN
 The go project is created successfully.
 goapp
