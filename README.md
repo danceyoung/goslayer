@@ -19,6 +19,28 @@ Demo on macOS
   * `./go run ./cmd/myapp //run you app`
 * In anther terminal, run `curl --location --request GET 'http://127.0.0.1:8080/goslayer/events'` , response data will output.
 
+Creation process and your project structure might look like this:
+
+```GoSLayer is a tool that helps you to create a golang project in seconds.• layered base on a standard architecture layout
+• followed by Package-Oriented-Design guideline
+link: https://github.com/danceyoung/goslayerPlease enter your project name: goappPlease choose a web framework,
+(1) use gin, (2) use handler buildin: 1
+Creating your go project with GIN
+The go project is created successfully.
+goapp
+├── cmd/
+│   └── myapp/
+│       └── router/
+│           └── handler/
+│           └── router.go
+│       └── main.go
+├── internal/
+│   └── myapp/
+│       └── event/
+├── └── pkg/
+│       └── middleware/
+```
+
 todo:
 
 buildin http.handler or gin
