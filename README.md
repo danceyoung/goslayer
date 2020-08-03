@@ -2,13 +2,12 @@
 
 ## One statement intro
 
-*
 * layered base on a standard architecture layout
 * followed by Package-Oriented-Design guideline
 
 ## Usage
 
-Demo on macOS
+### Demo on macOS
 
 * Download `goslayer-macos` execute file.
 * Open a terminal, cd a directory where you will creating your project, then run `goslayer-macos`.
@@ -19,7 +18,7 @@ Demo on macOS
   * `./go run ./cmd/myapp //run you app`
 * In anther terminal, run `curl --location --request GET 'http://127.0.0.1:8080/goslayer/events'` , response data will output.
 
-Creation process and your project structure might look like this:
+### Creation process and your project structure might look like this:
 
 ```
 GoSLayer is a tool that helps you to create a golang project in seconds.
