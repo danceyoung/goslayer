@@ -1,8 +1,8 @@
 package template
 
-type ginTemplate struct{}
+type GINTemplate struct{}
 
-func (gt ginTemplate) MainTemplate() string {
+func (gt GINTemplate) MainTemplate() string {
 	return `package main
 
 import (
@@ -16,7 +16,7 @@ func main() {
 	r.Run(":8080")
 }`
 }
-func (gt ginTemplate) RouterTemplate() string {
+func (gt GINTemplate) RouterTemplate() string {
 	return `package router
 
 import (
@@ -29,7 +29,7 @@ func Register(engine *gin.Engine) {
 	engine.POST("goslayer/events/join", (&handler.EventHandler{}).JoinAEvent)
 }`
 }
-func (gt ginTemplate) BaseHandlerTemplate() string {
+func (gt GINTemplate) BaseHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -59,7 +59,7 @@ func (baseh *BaseHandler) responseError(c *gin.Context, err error) {
 	c.JSON(200, result)
 }`
 }
-func (gt ginTemplate) EventHandlerTemplate() string {
+func (gt GINTemplate) EventHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -83,10 +83,10 @@ func (eventh *EventHandler) JoinAEvent(c *gin.Context) {
 	event.JoinAEvent(c.Query("event-id"), m)
 }`
 }
-func (gt ginTemplate) HttpMiddlewareTemplate() string {
+func (gt GINTemplate) HttpMiddlewareTemplate() string {
 	return ``
 }
-func (gt ginTemplate) EventBizTemplate() string {
+func (gt GINTemplate) EventBizTemplate() string {
 	return `package event
 
 import "errors"
