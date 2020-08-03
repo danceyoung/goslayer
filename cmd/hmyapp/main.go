@@ -8,6 +8,5 @@ import (
 )
 
 func main() {
-	log.Println("dd")
 	log.Println(http.ListenAndServe(":8080", nil))
 }
