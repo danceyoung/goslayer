@@ -3,7 +3,6 @@ package layer
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 	"time"
 
@@ -120,8 +119,21 @@ func (createstep CreateStep) Do(layer *Layer) {
 type OverStep struct{}
 
 func (overstep OverStep) Do(layer *Layer) {
-	cmd := exec.Command("go", "mod", "init", "ddd")
-	fmt.Println(cmd.Run())
+	// cmd := exec.Command("go", "mod", "init", "ddd")
+	// fmt.Println(cmd.Run())
+	var projectstructure = `github.com/danceyoung/goslayer
+├── cmd/
+│   └── myapp/
+│       └── router/
+│           └── handler/
+│           └── router.go
+│       └── main.go
+├── internal/
+│   └── myapp/
+│       └── event/
+├── └── pkg/
+│       └── middleware/`
 	fmt.Println("The go project is created successfully.")
+	fmt.Println(strings.ReplaceAll(projectstructure, stringReplacedInImportPath, layer.projectname))
 	panic(nil)
 }
