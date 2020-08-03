@@ -10,6 +10,18 @@ import (
 	"github.com/danceyoung/goslayer/internal/goslayer/layer/template"
 )
 
+const (
+	ginWebFramework         string = "GIN"
+	httpHandlerWebFramework string = "HttpHandler"
+)
+
+func newTemplate(webframework string) template.Template {
+	if webframework == httpHandlerWebFramework {
+		return template.HttpHandlerTemplate{}
+	}
+	return template.GINTemplate{}
+}
+
 type Step interface {
 	Do(*Layer)
 }
@@ -32,13 +44,16 @@ type ChooseWebFStep struct {
 }
 
 func (choosestep ChooseWebFStep) Do(layer *Layer) {
-	layer.webframework = layer.textscanned
-	if layer.webframework == "1" {
+
+	if layer.textscanned == "1" {
 		fmt.Println("Creating your go project with GIN")
-	} else if layer.webframework == "2" {
+		layer.webframework = ginWebFramework
+	} else if layer.textscanned == "2" {
 		fmt.Println("Creating your go project with http.Handler")
+		layer.webframework = httpHandlerWebFramework
 	} else {
-		fmt.Println("Creating your go project without any web framework.")
+		fmt.Println("Creating your go project with GIN.")
+		layer.webframework = ginWebFramework
 	}
 	time.Sleep(time.Second * 1)
 	layer.next(CreateStep{})
@@ -54,7 +69,7 @@ func (createstep CreateStep) Do(layer *Layer) {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	temp := template.NewTemplate(layer.webframework)
+	temp := newTemplate(layer.webframework)
 
 	routerfile.WriteString(strings.ReplaceAll(temp.RouterTemplate(), "goslayer", layer.projectname))
 	basehanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
