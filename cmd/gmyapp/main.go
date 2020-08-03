@@ -1,13 +1,12 @@
 package main
 
 import (
-	"github.com/danceyoung/goslayer/cmd/gmyapp/router/handler"
+	"github.com/danceyoung/goslayer/cmd/gmyapp/router"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-	r.GET("/goslayer/events", (&handler.EventHandler{}).Events)
-	r.POST("goslayer/events/join", (&handler.EventHandler{}).JoinAEvent)
+	router.Register(r)
 	r.Run(":8080")
 }
