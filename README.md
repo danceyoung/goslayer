@@ -2,7 +2,7 @@
 
 ## One statement intro
 
-GoSLayer is a tool that ~~~~helps you to create a golang project in seconds.
+GoSLayer is a tool that helps you to create a golang project in seconds.
 
 * layered base on a standard architecture layout
 * followed by Package-Oriented-Design guideline
