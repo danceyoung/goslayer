@@ -1,6 +1,6 @@
 # goslayer
 
-## on statement desc
+## One statement intro
 
 A tool that helps you to create a golang project **in seconds**.
 
