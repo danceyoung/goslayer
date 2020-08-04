@@ -1,5 +1,6 @@
 package template
 
+// Template is a interface for providing some template func
 type Template interface {
 	MainTemplate() string
 	RouterTemplate() string
@@ -9,8 +10,10 @@ type Template interface {
 	EventBizTemplate() string
 }
 
+// HttpHandlerTemplate implements Template and provides some go files base on http.Handler buildin
 type HttpHandlerTemplate struct{}
 
+// MainTemplate provides content for main.go file
 func (hht HttpHandlerTemplate) MainTemplate() string {
 	return `package main
 
@@ -27,6 +30,7 @@ func main() {
 }`
 }
 
+// RouterTemplate provides content for router.go file
 func (hht HttpHandlerTemplate) RouterTemplate() string {
 	return `package router
 
@@ -45,6 +49,7 @@ func init() {
 }`
 }
 
+// BaseHandlerTemplate provides content for basehandler.go file
 func (hht HttpHandlerTemplate) BaseHandlerTemplate() string {
 	return `package handler
 
@@ -80,6 +85,7 @@ func (baseh *BaseHandler) responseError(rw http.ResponseWriter, err error) {
 }`
 }
 
+// EventHandlerTemplate provides content for eventhandler.go file
 func (hht HttpHandlerTemplate) EventHandlerTemplate() string {
 	return `package handler
 
@@ -132,6 +138,7 @@ func (eventh *EventHandler) JoinAEvent(rw http.ResponseWriter, req *http.Request
 }`
 }
 
+// HttpMiddlewareTemplate provides content for httpset.go file
 func (hht HttpHandlerTemplate) HttpMiddlewareTemplate() string {
 	return `package middleware
 
@@ -149,6 +156,7 @@ func HttpSet(hf func(http.ResponseWriter, *http.Request)) http.Handler {
 }`
 }
 
+// EventBizTemplate provides content for business logic
 func (hht HttpHandlerTemplate) EventBizTemplate() string {
 	return `package event
 

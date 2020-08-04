@@ -1,7 +1,9 @@
 package template
 
+// GINTemplate implements Template and provides some go files base on http.Handler building
 type GINTemplate struct{}
 
+// MainTemplate provides content for main.go file
 func (gt GINTemplate) MainTemplate() string {
 	return `package main
 
@@ -16,6 +18,8 @@ func main() {
 	r.Run(":8080")
 }`
 }
+
+// RouterTemplate provides content for router.go file
 func (gt GINTemplate) RouterTemplate() string {
 	return `package router
 
@@ -29,6 +33,8 @@ func Register(engine *gin.Engine) {
 	engine.POST("goslayer/events/join", (&handler.EventHandler{}).JoinAEvent)
 }`
 }
+
+// BaseHandlerTemplate provides content for basehandler.go file
 func (gt GINTemplate) BaseHandlerTemplate() string {
 	return `package handler
 
@@ -59,6 +65,8 @@ func (baseh *BaseHandler) responseError(c *gin.Context, err error) {
 	c.JSON(200, result)
 }`
 }
+
+// EventHandlerTemplate provides content for eventhandler.go file
 func (gt GINTemplate) EventHandlerTemplate() string {
 	return `package handler
 
@@ -83,9 +91,13 @@ func (eventh *EventHandler) JoinAEvent(c *gin.Context) {
 	event.JoinAEvent(c.Query("event-id"), m)
 }`
 }
+
+// HttpMiddlewareTemplate provides content for middleware, but here is not implement
 func (gt GINTemplate) HttpMiddlewareTemplate() string {
 	return ``
 }
+
+// EventBizTemplate provides content for business logic
 func (gt GINTemplate) EventBizTemplate() string {
 	return `package event
 
