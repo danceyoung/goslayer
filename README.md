@@ -4,8 +4,9 @@
 
 GoSLayer is a tool that helps you to create a golang project in seconds.
 
-* layered base on a standard architecture layout
-* followed by Package-Oriented-Design guideline
+* [layered base on a standard architecture layout](https://github.com/golang-standards/project-layout) ([for chinese](https://github.com/danceyoung/paper-code/blob/master/package-oriented-design/packageorienteddesign.md))
+* [followed by Package-Oriented-Design guideline](https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html)
+* creating a runnable Rest ful Web Service
 
 ## Usage
 
