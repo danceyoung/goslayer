@@ -16,8 +16,6 @@ GoSLayer is a tool that helps you to create a golang project in seconds.
 4. cd `goapp`: `go mod init goapp;go run ./cmd/myapp `
 5. Open another terminal, run `curl --location --request GET 'http://127.0.0.1:8080/goslayer/events'` , response data will output.
 
-> You aslo can download execute file `goslayer-xxx` for your OS, then run and create your project.
-
 Creation process and your project structure might look like this:
 
 ```
