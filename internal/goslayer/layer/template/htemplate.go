@@ -8,13 +8,16 @@ type Template interface {
 	EventHandlerTemplate() string
 	HttpMiddlewareTemplate() string
 	EventBizTemplate() string
+	PkgDbMysqlTemplate() string
 }
 
 // HttpHandlerTemplate implements Template and provides some go files base on http.Handler buildin
-type HttpHandlerTemplate struct{}
+type HttpHandlerTemplate struct {
+	baseTemplate
+}
 
 // MainTemplate provides content for main.go file
-func (hht HttpHandlerTemplate) MainTemplate() string {
+func (hhtmpl HttpHandlerTemplate) MainTemplate() string {
 	return `package main
 
 import (
@@ -31,7 +34,7 @@ func main() {
 }
 
 // RouterTemplate provides content for router.go file
-func (hht HttpHandlerTemplate) RouterTemplate() string {
+func (hhtmpl HttpHandlerTemplate) RouterTemplate() string {
 	return `package router
 
 import (
@@ -50,7 +53,7 @@ func init() {
 }
 
 // BaseHandlerTemplate provides content for basehandler.go file
-func (hht HttpHandlerTemplate) BaseHandlerTemplate() string {
+func (hhtmpl HttpHandlerTemplate) BaseHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -86,7 +89,7 @@ func (baseh *BaseHandler) responseError(rw http.ResponseWriter, err error) {
 }
 
 // EventHandlerTemplate provides content for eventhandler.go file
-func (hht HttpHandlerTemplate) EventHandlerTemplate() string {
+func (hhtmpl HttpHandlerTemplate) EventHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -139,7 +142,7 @@ func (eventh *EventHandler) JoinAEvent(rw http.ResponseWriter, req *http.Request
 }
 
 // HttpMiddlewareTemplate provides content for httpset.go file
-func (hht HttpHandlerTemplate) HttpMiddlewareTemplate() string {
+func (hhtmpl HttpHandlerTemplate) HttpMiddlewareTemplate() string {
 	return `package middleware
 
 import (
@@ -157,41 +160,11 @@ func HttpSet(hf func(http.ResponseWriter, *http.Request)) http.Handler {
 }
 
 // EventBizTemplate provides content for business logic
-func (hht HttpHandlerTemplate) EventBizTemplate() string {
-	return `package event
-
-import "errors"
-
-//implement biz logic and wrap response data
-func Events() ([]map[string]interface{}, error) {
-	return events(), nil
+func (hhtmpl HttpHandlerTemplate) EventBizTemplate() string {
+	return hhtmpl.eventbizTemplate()
 }
 
-//query events from db,eg:mysql
-func events() []map[string]interface{} {
-	var result []map[string]interface{}
-	result = append(result, map[string]interface{}{"id": 1, "event_name": "dancing competition"}, map[string]interface{}{"id": 1, "event_name": "singing competition"})
-	return result
-
-}
-
-type Member struct {
-	Name  string
-	Email string
-}
-
-func JoinAEvent(eventid string, member Member) error {
-	if len(eventid) == 0 || len(member.Name) == 0 || len(member.Email) == 0 {
-		return errors.New("parmas are not enough")
-	}
-	if err := joinAEvent(eventid, member); err != nil {
-		return errors.New("join a event occurring a error: " + err.Error())
-	}
-	return nil
-}
-
-//insert a record into db
-func joinAEvent(eventid string, member Member) error {
-	return nil
-}`
+// PkgDbMysqlTemplate provides content for mysql.go file insider internal/pkg/db
+func (hhtmpl HttpHandlerTemplate) PkgDbMysqlTemplate() string {
+	return hhtmpl.pkgdbmysqlTemplate()
 }

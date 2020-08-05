@@ -1,10 +1,12 @@
 package template
 
 // GINTemplate implements Template and provides some go files base on http.Handler building
-type GINTemplate struct{}
+type GINTemplate struct {
+	baseTemplate
+}
 
 // MainTemplate provides content for main.go file
-func (gt GINTemplate) MainTemplate() string {
+func (gintmpl GINTemplate) MainTemplate() string {
 	return `package main
 
 import (
@@ -20,7 +22,7 @@ func main() {
 }
 
 // RouterTemplate provides content for router.go file
-func (gt GINTemplate) RouterTemplate() string {
+func (gintmpl GINTemplate) RouterTemplate() string {
 	return `package router
 
 import (
@@ -35,7 +37,7 @@ func Register(engine *gin.Engine) {
 }
 
 // BaseHandlerTemplate provides content for basehandler.go file
-func (gt GINTemplate) BaseHandlerTemplate() string {
+func (gintmpl GINTemplate) BaseHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -67,7 +69,7 @@ func (baseh *BaseHandler) responseError(c *gin.Context, err error) {
 }
 
 // EventHandlerTemplate provides content for eventhandler.go file
-func (gt GINTemplate) EventHandlerTemplate() string {
+func (gintmpl GINTemplate) EventHandlerTemplate() string {
 	return `package handler
 
 import (
@@ -93,46 +95,16 @@ func (eventh *EventHandler) JoinAEvent(c *gin.Context) {
 }
 
 // HttpMiddlewareTemplate provides content for middleware, but here is not implement
-func (gt GINTemplate) HttpMiddlewareTemplate() string {
+func (gintmpl GINTemplate) HttpMiddlewareTemplate() string {
 	return ``
 }
 
 // EventBizTemplate provides content for business logic
-func (gt GINTemplate) EventBizTemplate() string {
-	return `package event
-
-import "errors"
-
-//implement biz logic and wrap response data
-func Events() ([]map[string]interface{}, error) {
-	return events(), nil
+func (gintmpl GINTemplate) EventBizTemplate() string {
+	return gintmpl.eventbizTemplate()
 }
 
-//query events from db,eg:mysql
-func events() []map[string]interface{} {
-	var result []map[string]interface{}
-	result = append(result, map[string]interface{}{"id": 1, "event_name": "dancing competition"}, map[string]interface{}{"id": 1, "event_name": "singing competition"})
-	return result
-
-}
-
-type Member struct {
-	Name  string
-	Email string
-}
-
-func JoinAEvent(eventid string, member Member) error {
-	if len(eventid) == 0 || len(member.Name) == 0 || len(member.Email) == 0 {
-		return errors.New("parmas are not enough")
-	}
-	if err := joinAEvent(eventid, member); err != nil {
-		return errors.New("join a event occurring a error: " + err.Error())
-	}
-	return nil
-}
-
-//insert a record into db
-func joinAEvent(eventid string, member Member) error {
-	return nil
-}`
+// PkgDbMysqlTemplate provides content for mysql.go file insider internal/pkg/db
+func (gintmpl GINTemplate) PkgDbMysqlTemplate() string {
+	return gintmpl.pkgdbmysqlTemplate()
 }
