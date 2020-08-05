@@ -64,14 +64,14 @@ func (choosestep ChooseWebFStep) Do(layer *Layer) {
 type CreateStep struct{}
 
 func (createstep CreateStep) Do(layer *Layer) {
+	temp := newTemplate(layer.webframework)
+
 	os.MkdirAll("./"+layer.projectname+"/cmd/myapp/router/handler", os.ModePerm)
 	routerfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/router.go")
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
 		panic(nil)
 	}
-	temp := newTemplate(layer.webframework)
-
 	routerfile.WriteString(strings.ReplaceAll(temp.RouterTemplate(), stringReplacedInImportPath, layer.projectname))
 	basehanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/basehandler.go")
 	if err != nil {
@@ -79,7 +79,6 @@ func (createstep CreateStep) Do(layer *Layer) {
 		panic(nil)
 	}
 	basehanderfile.WriteString(temp.BaseHandlerTemplate())
-
 	eventhanderfile, err := os.Create("./" + layer.projectname + "/cmd/myapp/router/handler/eventhandler.go")
 	if err != nil {
 		fmt.Println("panic a error when creating project: ", err.Error())
@@ -94,7 +93,6 @@ func (createstep CreateStep) Do(layer *Layer) {
 	}
 	mainfile.WriteString(strings.ReplaceAll(temp.MainTemplate(), stringReplacedInImportPath, layer.projectname))
 
-	os.MkdirAll("./"+layer.projectname+"/internal/myapp", os.ModePerm)
 	os.MkdirAll("./"+layer.projectname+"/internal/pkg/middleware", os.ModePerm)
 	httsetmwfile, err := os.Create("./" + layer.projectname + "/internal/pkg/middleware/httpset.go")
 	if err != nil {
@@ -102,6 +100,14 @@ func (createstep CreateStep) Do(layer *Layer) {
 		panic(nil)
 	}
 	httsetmwfile.WriteString(temp.HttpMiddlewareTemplate())
+
+	os.MkdirAll("./"+layer.projectname+"/internal/pkg/db", os.ModePerm)
+	mysqldbfile, err := os.Create("./" + layer.projectname + "/internal/pkg/db/mysql.go")
+	if err != nil {
+		fmt.Println("panic a error when creating project: ", err.Error())
+		panic(nil)
+	}
+	mysqldbfile.WriteString(temp.PkgDbMysqlTemplate())
 
 	os.MkdirAll("./"+layer.projectname+"/internal/myapp/event", os.ModePerm)
 	eventbizfile, err := os.Create("./" + layer.projectname + "/internal/myapp/event/event.go")
