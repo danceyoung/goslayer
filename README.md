@@ -10,7 +10,7 @@ GoSLayer is a tool that helps you to create a golang project in seconds.
 
 ## Usage
 
-1. `$ go get github.com/danceyoung/goslayer`
+1. `$ go get -u github.com/danceyoung/goslayer`
 2. cd any directory where you will creating your project: `$ goslayer`
 3. Enter your project name (here is `goapp`) and then choose a web framework(gin or http handler, default is gin)
 4. cd `goapp`: `go mod init goapp;go run ./cmd/myapp `
