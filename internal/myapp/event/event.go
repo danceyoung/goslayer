@@ -1,17 +1,29 @@
 package event
 
-import "errors"
+import (
+	"errors"
+)
 
-//implement biz logic and wrap response data
+//Events implement biz logic and wrap response data
 func Events() ([]map[string]interface{}, error) {
-	return events(), nil
+	return events()
 }
 
 //query events from db,eg:mysql
-func events() []map[string]interface{} {
+func events() ([]map[string]interface{}, error) {
 	var result []map[string]interface{}
+	// wrapping data by using mysql
+	// rows, err := db.NewMysql().Query("sql statement")
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// defer rows.Close()
+	// for rows.Next() {
+	// 	var temp string
+	// 	err = rows.Scan(&temp)
+	// }
 	result = append(result, map[string]interface{}{"id": 1, "event_name": "dancing competition"}, map[string]interface{}{"id": 1, "event_name": "singing competition"})
-	return result
+	return result, nil
 
 }
 
