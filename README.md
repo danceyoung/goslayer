@@ -10,15 +10,13 @@ GoSLayer is a tool that helps you to create a golang project in seconds.
 
 ## Usage
 
-### Demo on macOS
-
-* Download `goslayer-macos` execute file.
-* Open a terminal, cd a directory where you will creating your project: `./xxx/xxx/goslayer-macos`
+* `$ go get github.com/danceyoung/goslayer`
+* cd any directory where you will creating your project: `$ goslayer`
 * Enter your project name (here is `goapp`) and then choose a web framework(gin or http handler, default is gin)
 * cd `goapp`: `go mod init goapp;go run ./cmd/myapp `
-* Open anther terminal, run `curl --location --request GET 'http://127.0.0.1:8080/goslayer/events'` , response data will output.
+* Open another terminal, run `curl --location --request GET 'http://127.0.0.1:8080/goslayer/events'` , response data will output.
 
-### Creation process and your project structure might look like this:
+ Creation process and your project structure might look like this:
 
 ```
 GoSLayer is a tool that helps you to create a golang project in seconds.
