@@ -45,21 +45,19 @@ goapp
 │       └── middleware/
 ```
 
+## References
+
+This tool is based on material taken from the follow posts.
+
+* [Ardan Labs: Package-Oriented-Design](https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html),
+* [Github: golang standard project layout](https://github.com/golang-standards/project-layout),
+* [Microsoft: Design Fundamentals - Layout Application Guideline](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/ee658109(v=pandp.10))
+* [Go面向包的设计和架构分层](https://github.com/danceyoung/paper-code/blob/master/package-oriented-design/packageorienteddesign.md)
+
 todo:
 
-buildin http.handler or gin
-router-biz
+redis
 
-repository link
-
-println project structure
-
-usage
-
-go check go install
-
-cmd go mod tidy
-
-cmd go run ./cmd/dd
+logger
 
 unit test, integration test
