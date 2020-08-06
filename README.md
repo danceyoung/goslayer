@@ -47,7 +47,7 @@ goapp
 
 ## References
 
-This tool is based on material taken from the follow posts.
+This tool is based on material taken from the following posts.
 
 * [Ardan Labs: Package-Oriented-Design](https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html),
 * [Github: golang standard project layout](https://github.com/golang-standards/project-layout),
