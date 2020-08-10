@@ -13,17 +13,22 @@ var mysqldb *sql.DB
 const mysqlconnstring string = ""
 
 func init() {
-	if len(mysqlconnstring) > 0 {
-		dbconn, err := sql.Open("mysql", mysqlconnstring)
-		if err != nil {
+
+	dbconn, err := sql.Open("mysql", mysqlconnstring)
+	if err != nil {
+		panic(err)
+	} else {
+		if err = dbconn.Ping(); err != nil {
 			panic(err)
+		} else {
+			dbconn.SetMaxOpenConns(20)
+			dbconn.SetMaxIdleConns(200)
+			mysqldb = dbconn
+
+			log.Println("mysql has already prepared for user connection.")
 		}
-		dbconn.SetMaxOpenConns(20)
-		dbconn.SetMaxIdleConns(200)
-		mysqldb = dbconn
 	}
 
-	log.Println("mysql is opened successfully")
 }
 
 //NewMysql returns mysql connection instance
